@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>義足リハビリテーション 評価レポート</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Noto Sans JP',sans-serif;background:#E0E5EC;padding:20px;color:#1C2B3A;}
+.ctrl{max-width:794px;margin:0 auto 14px;display:flex;align-items:center;}
+.ctrl h1{font-size:14px;color:#1A5F7A;font-weight:700;}
+.btn-print{margin-left:auto;padding:8px 18px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:13px;background:linear-gradient(135deg,#1A5F7A,#2E86AB);color:#fff;}
+.page{width:794px;min-height:1123px;background:#fff;margin:0 auto;padding:22px 28px;box-shadow:0 4px 24px rgba(0,0,0,.15);display:flex;flex-direction:column;gap:9px;}
+.hdr{background:linear-gradient(135deg,#1A5F7A,#2E86AB);border-radius:10px;padding:11px 16px;display:flex;justify-content:space-between;align-items:center;}
+.hdr-title{font-size:16px;font-weight:900;color:#fff;}
+.hdr-sub{font-size:8.5px;color:rgba(255,255,255,.7);margin-top:2px;}
+.k-badge{background:rgba(255,255,255,.18);border-radius:8px;padding:5px 16px;text-align:center;}
+.k-badge-lbl{font-size:8.5px;color:rgba(255,255,255,.8);}
+.k-badge-val{font-size:32px;font-weight:900;line-height:1;}
+.info-bar{background:#F0F4F8;border-radius:8px;padding:7px 14px;display:flex;gap:28px;align-items:center;}
+.info-lbl{font-size:8.5px;color:#8AA5B5;}
+.info-val{font-size:16px;font-weight:900;color:#1C2B3A;}
+.info-val.sm{font-size:12px;font-weight:700;}
+.amp-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 11px;border-radius:20px;margin-right:5px;}
+.card{background:#fff;border-radius:10px;padding:10px 13px;border:1px solid #E8F0F6;box-shadow:0 1px 4px rgba(0,0,0,.05);}
+.card-title{font-size:11px;font-weight:800;color:#1A5F7A;margin-bottom:2px;}
+.card-desc{font-size:8px;color:#6B8A9A;margin-bottom:5px;}
+.gauge-wrap{margin-top:5px;}
+.gauge-lbls{display:flex;justify-content:space-between;font-size:8px;color:#8AA5B5;margin-bottom:2px;}
+.gauge-track{background:#E8F0F6;border-radius:5px;height:11px;overflow:hidden;}
+.gauge-bar{height:100%;border-radius:5px;}
+.gauge-pct{font-size:8.5px;font-weight:700;margin-top:2px;text-align:right;}
+.lv-desc{margin-top:7px;border-radius:7px;padding:5px 9px;}
+.lv-desc-title{font-size:11px;font-weight:900;}
+.lv-desc-sub{font-size:8px;}
+.lv-desc-text{font-size:8px;color:#4A6275;margin-top:1px;}
+.k-scale{display:flex;gap:3px;margin-top:7px;}
+.k-scale-item{flex:1;text-align:center;border-radius:4px;padding:3px 1px;}
+.amp-row{display:grid;grid-template-columns:1fr 200px;gap:8px;}
+.amp-scores{display:flex;flex-direction:column;gap:8px;}
+.lsa-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.lsa-fan-wrap{display:flex;justify-content:center;}
+.lsa-fan-lbl{font-size:8px;color:#4A6275;margin-top:4px;font-weight:600;line-height:1.6;}
+.walk-grid{display:flex;flex-direction:column;gap:6px;}
+.walk-card{border-radius:8px;padding:8px 9px;}
+.walk-lbl{font-size:8.5px;color:#6B8A9A;margin-bottom:2px;}
+.walk-row{display:flex;align-items:baseline;gap:3px;flex-wrap:wrap;}
+.walk-val{font-size:22px;font-weight:900;line-height:1;}
+.walk-unit{font-size:9.5px;color:#8AA5B5;}
+.walk-badge{display:block;font-size:9.5px;font-weight:700;background:#fff;border-radius:4px;padding:1px 6px;margin-top:3px;text-align:center;}
+.walk-desc{font-size:8px;color:#6B8A9A;margin-top:2px;}
+.footer{border-top:1px solid #E8F0F6;padding-top:5px;display:flex;justify-content:space-between;margin-top:auto;}
+.footer span{font-size:7.5px;color:#8AA5B5;}
+@media print{
+  body{background:#fff;padding:0;}
+  .ctrl{display:none;}
+  .page{width:210mm;min-height:297mm;padding:8mm 10mm;box-shadow:none;margin:0;gap:6px;}
+  @page{size:A4;margin:0;}
+  .card{padding:7px 10px;}
+  .card-title{font-size:10px;}
+  .card-desc{font-size:7px;}
+  .gauge-track{height:9px;}
+  .k-scale-item{padding:2px 1px;font-size:8px;}
+  .lv-desc{padding:4px 7px;}
+  .lv-desc-title{font-size:10px;}
+  .lv-desc-text{font-size:7px;}
+  .walk-val{font-size:18px;}
+  .walk-card{padding:6px 8px;}
+}
+</style>
+</head>
+<body>
+<div class="ctrl">
+  <h1>印刷プレビュー（A4・表面）</h1>
+  <button class="btn-print" onclick="window.print()">🖨 PDF保存・印刷</button>
+</div>
+<div class="page">
+  <div class="hdr">
+    <div>
+      <div class="hdr-title">義足リハビリテーション　評価レポート</div>
+      <div class="hdr-sub">Prosthetic Rehabilitation Assessment Report</div>
+    </div>
+    <div class="k-badge">
+      <div class="k-badge-lbl">機能分類レベル</div>
+      <div class="k-badge-val" id="k-badge-val">K3</div>
+    </div>
+  </div>
+  <div class="info-bar">
+    <div><div class="info-lbl">氏名</div><div class="info-val" id="pt-name"></div></div>
+    <div><div class="info-lbl">評価日</div><div class="info-val sm" id="pt-date"></div></div>
+    <div><div class="info-lbl">切断部位</div><div id="pt-amputee" style="margin-top:3px"></div></div>
+  </div>
+  <div class="amp-row">
+    <div class="amp-scores">
+      <div class="card" style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <div>
+            <div class="card-title">🦿 AMP（義足あり）</div>
+            <div class="card-desc">切断者の歩行能力・移動能力を21項目で評価する指標です</div>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:30px;font-weight:900;color:#1A5F7A;line-height:1" id="amp-score">38</span>
+            <span style="font-size:10px;color:#8AA5B5"> / 47</span>
+          </div>
+        </div>
+        <div class="gauge-wrap">
+          <div class="gauge-lbls"><span>0</span><span>47点満点</span></div>
+          <div class="gauge-track"><div class="gauge-bar" id="amp-bar"></div></div>
+          <div class="gauge-pct" id="amp-pct"></div>
+        </div>
+        <div class="lv-desc" id="k-desc-box">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="lv-desc-title" id="k-desc-title"></span>
+            <span class="lv-desc-sub">MFCL分類</span>
+          </div>
+          <div class="lv-desc-text" id="k-desc-text"></div>
+        </div>
+        <div class="k-scale" id="k-scale"></div>
+      </div>
+      <div class="card" style="flex:1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+          <div>
+            <div class="card-title">🦿 AMP（義足なし）</div>
+            <div class="card-desc">義足なし状態での移動能力を評価する指標です</div>
+          </div>
+          <div style="text-align:right">
+            <span style="font-size:30px;font-weight:900;color:#1A5F7A;line-height:1" id="amp-no-score">24</span>
+            <span style="font-size:10px;color:#8AA5B5"> / 43</span>
+          </div>
+        </div>
+        <div class="gauge-wrap">
+          <div class="gauge-lbls"><span>0</span><span>43点満点</span></div>
+          <div class="gauge-track"><div class="gauge-bar" id="amp-no-bar"></div></div>
+          <div class="gauge-pct" id="amp-no-pct"></div>
+        </div>
+        <div class="lv-desc" id="k-no-desc-box">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="lv-desc-title" id="k-no-desc-title"></span>
+            <span class="lv-desc-sub">MFCL分類</span>
+          </div>
+          <div class="lv-desc-text" id="k-no-desc-text"></div>
+        </div>
+        <div class="k-scale" id="k-no-scale"></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📋 AMP カテゴリ別得点</div>
+      <div class="card-desc">義足あり ／ 義足なし</div>
+      <div id="cat-bars"></div>
+    </div>
+  </div>
+  <div class="lsa-row">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;">
+        <div>
+          <div class="card-title">🗺 LSA スコア</div>
+          <div class="card-desc">過去4週間でどの範囲まで移動できたかを評価する生活範囲の指標です</div>
+        </div>
+        <div style="text-align:right">
+          <span style="font-size:34px;font-weight:900;color:#1A5F7A;line-height:1" id="lsa-score">62</span>
+          <span style="font-size:11px;color:#8AA5B5"> / 120</span>
+        </div>
+      </div>
+      <div class="gauge-wrap">
+        <div class="gauge-lbls"><span>0</span><span>120点満点</span></div>
+        <div class="gauge-track"><div class="gauge-bar" id="lsa-bar"></div></div>
+        <div class="gauge-pct" id="lsa-pct"></div>
+      </div>
+      <div class="lv-desc" id="lsa-desc-box">
+        <div class="lv-desc-title" id="lsa-desc-title"></div>
+        <div class="lv-desc-text" id="lsa-desc-text"></div>
+      </div>
+      <div class="k-scale" id="lsa-scale"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🗺 LSA 生活範囲マップ</div>
+      <div class="card-desc">到達できた範囲が広いほど外側まで色が塗られます</div>
+      <div class="lsa-fan-wrap">
+        <svg id="lsa-svg" width="100%" height="190" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+      <div class="lsa-fan-lbl" id="lsa-fan-lbl"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">🚶 歩行計測</div>
+    <div class="card-desc">10m歩行は歩く速さの指標。TUGは立ち上がり〜方向転換〜着座までの時間（短いほど良好）</div>
+    <div class="walk-grid" id="walk-grid"></div>
+  </div>
+  <div class="footer">
+    <span>AMP: Amputee Mobility Predictor　LSA: Life Space Assessment　TUG: Timed Up and Go Test</span>
+    <span>本レポートは理学療法士による評価結果をまとめたものです</span>
+  </div>
+</div>
+<script>
+var D={
+  name:"山田 太郎", date:"2026年5月23日",
+  ampLevelR:"大腿切断", ampLevelL:"なし",
+  ampScore:38, maxScore:47, kLevel:"K3",
+  cats:[
+    {name:"座位",      score:4,  max:4},
+    {name:"立ち上がり",score:2,  max:2},
+    {name:"立位",      score:6,  max:8},
+    {name:"着座",      score:2,  max:2},
+    {name:"歩行",      score:12, max:16},
+    {name:"応用歩行",  score:7,  max:8},
+    {name:"補助具加算",score:5,  max:5},
+  ],
+  ampNoScore:24, ampNoMax:43, kNoLevel:"K2",
+  catsNo:[
+    {name:"座位",      score:4,  max:4},
+    {name:"立ち上がり",score:2,  max:2},
+    {name:"立位",      score:4,  max:8},
+    {name:"着座",      score:2,  max:2},
+    {name:"歩行",      score:6,  max:16},
+    {name:"応用歩行",  score:4,  max:8},
+    {name:"補助具加算",score:2,  max:5},
+  ],
+  lsaScore:62, lsaMax:120,
+  comf_time:10.87, comf_speed:0.92,
+  fast_time:7.63,  fast_speed:1.31,
+  tugR:11.4, tugL:12.8,
+};
+var K_LVS=[
+  {k:"K0〜K1",color:"#FF6B6B",bg:"#FFF0F0",desc:"現時点では義足による歩行が難しい状態です"},
+  {k:"K2",    color:"#FFB347",bg:"#FFF8EC",desc:"平地での室内・近距離歩行が可能な状態です"},
+  {k:"K3",    color:"#4CAF82",bg:"#EDFBF4",desc:"屋外での応用歩行や速度変化への対応が可能な状態です"},
+  {k:"K4",    color:"#4D96FF",bg:"#EBF4FF",desc:"スポーツや高い身体活動が可能な状態です"},
+];
+var LSA_LVS=[
+  {label:"制限あり",minV:0,  maxV:19, color:"#FF6B6B",bg:"#FFF0F0",desc:"主に自宅内での生活が中心です"},
+  {label:"やや制限",minV:20, maxV:49, color:"#FFB347",bg:"#FFF8EC",desc:"近所への外出が一部できています"},
+  {label:"中程度",  minV:50, maxV:79, color:"#4CAF82",bg:"#EDFBF4",desc:"地域内での活動が行えています"},
+  {label:"広い",    minV:80, maxV:120,color:"#4D96FF",bg:"#EBF4FF",desc:"広い範囲での活動が行えています"},
+];
+var COMF_Z=[
+  {maxV:0.40,color:"#FF6B6B",label:"要介助",  cutoffSec:"25秒以上"},
+  {maxV:0.60,color:"#FFB347",label:"制限的",  cutoffSec:"16〜25秒"},
+  {maxV:0.80,color:"#4CAF82",label:"地域内",  cutoffSec:"12〜16秒"},
+  {maxV:1.60,color:"#4D96FF",label:"制限なし",cutoffSec:"〜12秒"},
+];
+var TUG_Z=[
+  {maxV:13.4,color:"#4D96FF",label:"良好"},
+  {maxV:19.9,color:"#4CAF82",label:"転倒注意"},
+  {maxV:29.9,color:"#FFB347",label:"屋内自立"},
+  {maxV:30.0,color:"#FF6B6B",label:"要介助"},
+];
+// LSA扇形定義（document2準拠）
+var LSA_FANS=[
+  {id:0,label:"寝室",              rx:70,  ry:35},
+  {id:1,label:"住居内",            rx:140, ry:70},
+  {id:2,label:"居住空間のごく近所", rx:220, ry:110},
+  {id:3,label:"自宅近隣",          rx:300, ry:150},
+  {id:4,label:"町内",              rx:400, ry:180},
+  {id:5,label:"町外",              rx:590, ry:212},
+];
+
+function getK(k){return K_LVS.find(function(l){return l.k===k;})||K_LVS[2];}
+function getLSA(s){return LSA_LVS.find(function(l){return s>=l.minV&&s<=l.maxV;})||LSA_LVS[2];}
+function getComf(v){return COMF_Z.find(function(z){return v<=z.maxV;})||COMF_Z[COMF_Z.length-1];}
+function getTug(v){return TUG_Z.find(function(z){return v<=z.maxV;})||TUG_Z[TUG_Z.length-1];}
+function catCol(r){return r>=0.85?"#4CAF82":r>=0.60?"#FFB347":"#FF6B6B";}
+
+window.addEventListener("DOMContentLoaded",function(){
+  // 評価アプリからのデータを自動読み込み
+  try{
+    var saved=localStorage.getItem("amp_summary_latest");
+    if(saved){
+      var d=JSON.parse(saved);
+      // 基本情報
+      if(d.info){
+        D.name=d.info.name||D.name;
+        D.date=d.evalDate||D.date;
+        D.ampLevelR=d.info.ampLevelR||D.ampLevelR;
+        D.ampLevelL=d.info.ampLevelL||D.ampLevelL;
+      }
+      // AMP義足あり
+      if(d.ampPRO&&d.ampTotalPRO!==undefined){
+        D.ampScore=d.ampTotalPRO;
+        D.kLevel=d.kLevelPRO;
+        // カテゴリ別集計
+        var AMP_ITEMS_L=[
+          {id:1,cat:"座位",binary:true},{id:2,cat:"座位",binary:true},
+          {id:3,cat:"立ち上がり"},{id:4,cat:"立位"},{id:5,cat:"立位",binary:true},
+          {id:6,cat:"立位"},{id:7,cat:"立位"},{id:8,cat:"立位"},
+          {id:9,cat:"着座"},{id:10,cat:"歩行"},{id:11,cat:"歩行",binary:true},
+          {id:12,cat:"歩行",binary:true},{id:13,cat:"歩行",binary:true},
+          {id:14,cat:"歩行",binary:true},{id:15,cat:"歩行"},{id:16,cat:"歩行"},
+          {id:17,cat:"歩行",binary:true},{id:18,cat:"応用歩行"},{id:19,cat:"応用歩行"},
+          {id:20,cat:"応用歩行"},{id:21,cat:"応用歩行"}
+        ];
+        var catNames=["座位","立ち上がり","立位","着座","歩行","応用歩行"];
+        var cats=catNames.map(function(cn){
+          var items=AMP_ITEMS_L.filter(function(i){return i.cat===cn;});
+          var score=items.reduce(function(s,item){
+            var v=d.ampPRO.scores?d.ampPRO.scores[item.id]:undefined;
+            if(v===undefined)return s;
+            return s+(item.binary?(v===1?2:0):v);
+          },0);
+          return{name:cn,score:score,max:items.length*2};
+        });
+        cats.push({name:"補助具加算",score:d.ampPRO.device||0,max:5});
+        D.cats=cats;
+      }
+      // AMP義足なし
+      if(d.ampNO&&d.ampTotalNO!==undefined){
+        D.ampNoScore=d.ampTotalNO;
+        D.ampNoMax=43;
+        D.kNoLevel=d.kLevelNO;
+        var AMP_NO_ITEMS=AMP_ITEMS_L.filter(function(i){return i.id!==8;});
+        var catNamesNo=["座位","立ち上がり","立位","着座","歩行","応用歩行"];
+        var catsNo=catNamesNo.map(function(cn){
+          var items=AMP_NO_ITEMS.filter(function(i){return i.cat===cn;});
+          var score=items.reduce(function(s,item){
+            var v=d.ampNO.scores?d.ampNO.scores[item.id]:undefined;
+            if(v===undefined)return s;
+            return s+(item.binary?(v===1?2:0):v);
+          },0);
+          return{name:cn,score:score,max:items.length*2};
+        });
+        catsNo.push({name:"補助具加算",score:d.ampNO.device||0,max:5});
+        D.catsNo=catsNo;
+      }
+      // LSA
+      if(d.lsaTotal!==undefined){
+        D.lsaScore=d.lsaTotal;
+      }
+      // 歩行
+      if(d.walk){
+        D.comf_time=parseFloat(d.walk.comf_time)||D.comf_time;
+        D.comf_speed=d.walk.comf_time?(10/parseFloat(d.walk.comf_time)):D.comf_speed;
+        D.fast_time=parseFloat(d.walk.fast_time)||D.fast_time;
+        D.fast_speed=d.walk.fast_time?(10/parseFloat(d.walk.fast_time)):D.fast_speed;
+        D.tugR=parseFloat(d.walk.tug_r)||D.tugR;
+        D.tugL=parseFloat(d.walk.tug_l)||D.tugL;
+      }
+      // 読み込み通知
+      var banner=document.createElement("div");
+      banner.style.cssText="position:fixed;top:10px;left:50%;transform:translateX(-50%);background:#4CAF82;color:#fff;padding:8px 18px;border-radius:8px;font-weight:700;font-size:13px;z-index:999;";
+      banner.textContent="✓ 評価アプリのデータを読み込みました";
+      document.body.appendChild(banner);
+      setTimeout(function(){banner.remove();},3000);
+    }
+  }catch(e){console.log("localStorage読み込みエラー:",e);}
+
+  var NS="http://www.w3.org/2000/svg";
+  var kInfo=getK(D.kLevel);
+  var lsaInfo=getLSA(D.lsaScore);
+
+  // 基本情報
+  document.getElementById("pt-name").textContent=D.name;
+  document.getElementById("pt-date").textContent=D.date;
+  var ae=document.getElementById("pt-amputee");
+  [["右",D.ampLevelR],["左",D.ampLevelL]].forEach(function(s){
+    if(s[1]==="なし") return;
+    var sp=document.createElement("span");
+    sp.className="amp-badge";
+    sp.style.background="#1A5F7A";
+    sp.style.color="#fff";
+    sp.textContent=s[0]+"："+s[1];
+    ae.appendChild(sp);
+  });
+
+  // AMP描画ヘルパー
+  function drawAMP(score,maxS,kLv,barId,pctId,boxId,titleId,textId,scaleId,badgeId){
+    var ki=getK(kLv);
+    if(badgeId){document.getElementById(badgeId).textContent=kLv;document.getElementById(badgeId).style.color=ki.color;}
+    var pct=Math.round((score/maxS)*100);
+    document.getElementById(barId).style.width=pct+"%";
+    document.getElementById(barId).style.background=ki.color;
+    document.getElementById(pctId).textContent=pct+"%";
+    document.getElementById(pctId).style.color=ki.color;
+    var db=document.getElementById(boxId);
+    db.style.background=ki.bg; db.style.border="1.5px solid "+ki.color+"55";
+    document.getElementById(titleId).textContent=kLv+" レベル";
+    document.getElementById(titleId).style.color=ki.color;
+    document.getElementById(textId).textContent=ki.desc;
+    var sc=document.getElementById(scaleId);
+    K_LVS.forEach(function(lv){
+      var d=document.createElement("div"); d.className="k-scale-item";
+      var act=lv.k===kLv;
+      d.style.background=act?lv.color:lv.bg;
+      d.style.border="1px solid "+lv.color+"55";
+      d.innerHTML="<span style='font-size:"+(act?"9":"8")+"px;font-weight:700;color:"+(act?"#fff":lv.color)+"'>"+lv.k+"</span>";
+      sc.appendChild(d);
+    });
+  }
+  drawAMP(D.ampScore,D.maxScore,D.kLevel,"amp-bar","amp-pct","k-desc-box","k-desc-title","k-desc-text","k-scale","k-badge-val");
+  drawAMP(D.ampNoScore,D.ampNoMax,D.kNoLevel,"amp-no-bar","amp-no-pct","k-no-desc-box","k-no-desc-title","k-no-desc-text","k-no-scale",null);
+
+  // カテゴリ比較
+  var cb=document.getElementById("cat-bars");
+  var hdr=document.createElement("div");
+  hdr.style.cssText="display:flex;gap:10px;margin-bottom:5px;";
+  hdr.innerHTML="<div style='display:flex;align-items:center;gap:3px'><div style='width:10px;height:6px;border-radius:2px;background:#1A5F7A'></div><span style='font-size:7.5px;color:#4A6275'>義足あり</span></div>"+
+    "<div style='display:flex;align-items:center;gap:3px'><div style='width:10px;height:6px;border-radius:2px;background:#57C5B6'></div><span style='font-size:7.5px;color:#4A6275'>義足なし</span></div>";
+  cb.appendChild(hdr);
+  D.cats.forEach(function(cat,i){
+    var nc=D.catsNo[i];
+    var rP=cat.score/cat.max, rN=nc?nc.score/nc.max:0;
+    var row=document.createElement("div"); row.style.cssText="margin-bottom:5px;";
+    row.innerHTML="<div style='font-size:9px;color:#4A6275;margin-bottom:2px'>"+cat.name+"</div>"+
+      "<div style='display:flex;align-items:center;gap:4px;margin-bottom:2px'>"+
+        "<div style='flex:1;background:#E8F0F6;border-radius:3px;height:8px;overflow:hidden'>"+
+          "<div style='width:"+(rP*100)+"%;height:100%;background:#1A5F7A;border-radius:3px'></div></div>"+
+        "<span style='font-size:8.5px;font-weight:700;color:#1A5F7A;width:26px;text-align:right;flex-shrink:0'>"+cat.score+"/"+cat.max+"</span></div>"+
+      "<div style='display:flex;align-items:center;gap:4px'>"+
+        "<div style='flex:1;background:#E8F0F6;border-radius:3px;height:8px;overflow:hidden'>"+
+          "<div style='width:"+(rN*100)+"%;height:100%;background:#57C5B6;border-radius:3px'></div></div>"+
+        "<span style='font-size:8.5px;font-weight:700;color:#57C5B6;width:26px;text-align:right;flex-shrink:0'>"+(nc?nc.score+"/"+nc.max:"")+"</span></div>";
+    cb.appendChild(row);
+  });
+
+  // LSA スコア
+  var lsaP=Math.round((D.lsaScore/D.lsaMax)*100);
+  document.getElementById("lsa-bar").style.width=lsaP+"%";
+  document.getElementById("lsa-bar").style.background=lsaInfo.color;
+  document.getElementById("lsa-pct").textContent=lsaP+"%";
+  document.getElementById("lsa-pct").style.color=lsaInfo.color;
+  var lb=document.getElementById("lsa-desc-box");
+  lb.style.background=lsaInfo.bg; lb.style.border="1.5px solid "+lsaInfo.color+"55";
+  document.getElementById("lsa-desc-title").textContent=lsaInfo.label;
+  document.getElementById("lsa-desc-title").style.color=lsaInfo.color;
+  document.getElementById("lsa-desc-text").textContent=lsaInfo.desc;
+  var ls=document.getElementById("lsa-scale");
+  LSA_LVS.forEach(function(lv){
+    var d=document.createElement("div"); d.className="k-scale-item";
+    var act=lv.label===lsaInfo.label;
+    d.style.background=act?lv.color:lv.bg;
+    d.style.border="1px solid "+lv.color+"55";
+    d.innerHTML="<span style='font-size:"+(act?"9":"8")+"px;font-weight:700;color:"+(act?"#fff":lv.color)+"'>"+lv.label+"</span>";
+    ls.appendChild(d);
+  });
+
+  // LSA 生活範囲マップ（document2のコードをそのまま移植・点線追加）
+  var svg=document.getElementById("lsa-svg");
+  var ox=4, oy=216;
+  var reached=0;
+  if(D.lsaScore>=80) reached=5;
+  else if(D.lsaScore>=50) reached=4;
+  else if(D.lsaScore>=30) reached=3;
+  else if(D.lsaScore>=15) reached=2;
+  else if(D.lsaScore>=5)  reached=1;
+
+  var defs=document.createElementNS(NS,"defs");
+  var clip=document.createElementNS(NS,"clipPath");
+  clip.setAttribute("id","lsaClip");
+  var cr=document.createElementNS(NS,"rect");
+  cr.setAttribute("x",ox); cr.setAttribute("y","0");
+  cr.setAttribute("width","596"); cr.setAttribute("height",oy);
+  clip.appendChild(cr); defs.appendChild(clip); svg.appendChild(defs);
+
+  var g=document.createElementNS(NS,"g");
+  g.setAttribute("clip-path","url(#lsaClip)");
+  var reversedFans=[].concat(LSA_FANS).reverse();
+  reversedFans.forEach(function(lv){
+    var ok=lv.id<=reached;
+    var el=document.createElementNS(NS,"ellipse");
+    el.setAttribute("cx",ox); el.setAttribute("cy",oy);
+    el.setAttribute("rx",lv.rx); el.setAttribute("ry",lv.ry);
+    if(ok){
+      var op=(0.12+(lv.id/5)*0.58).toFixed(2);
+      el.setAttribute("fill","rgba(26,95,122,"+op+")");
+      el.setAttribute("stroke","rgba(26,95,122,0.4)");
+      el.setAttribute("stroke-width","1");
+      el.setAttribute("stroke-dasharray","4,3");
+    } else {
+      el.setAttribute("fill","rgba(236,242,247,0.9)");
+      el.setAttribute("stroke","#C8D8E4");
+      el.setAttribute("stroke-width","0.8");
+      el.setAttribute("stroke-dasharray","4,3");
+    }
+    g.appendChild(el);
+  });
+  svg.appendChild(g);
+
+  LSA_FANS.forEach(function(lv,i){
+    var prevRx=i===0?0:LSA_FANS[i-1].rx;
+    var prevRy=i===0?0:LSA_FANS[i-1].ry;
+    var midRx=(prevRx+lv.rx)/2;
+    var midRy=(prevRy+lv.ry)/2;
+    var angle=Math.PI/7;
+    var lx=ox+midRx*Math.cos(angle);
+    var ly=oy-midRy*Math.sin(angle);
+    var t=document.createElementNS(NS,"text");
+    t.setAttribute("x",lx.toFixed(1)); t.setAttribute("y",ly.toFixed(1));
+    t.setAttribute("text-anchor","middle"); t.setAttribute("dominant-baseline","middle");
+    t.setAttribute("font-size",i<=1?"7":"8");
+    t.setAttribute("font-weight","700");
+    t.setAttribute("fill","#1C2B3A");
+    t.textContent=lv.label;
+    svg.appendChild(t);
+  });
+
+  var lh=document.createElementNS(NS,"line");
+  lh.setAttribute("x1",ox); lh.setAttribute("y1",oy);
+  lh.setAttribute("x2","598"); lh.setAttribute("y2",oy);
+  lh.setAttribute("stroke","#1A5F7A"); lh.setAttribute("stroke-width","1.5");
+  svg.appendChild(lh);
+  var lv2=document.createElementNS(NS,"line");
+  lv2.setAttribute("x1",ox); lv2.setAttribute("y1",oy);
+  lv2.setAttribute("x2",ox); lv2.setAttribute("y2","2");
+  lv2.setAttribute("stroke","#1A5F7A"); lv2.setAttribute("stroke-width","1.5");
+  svg.appendChild(lv2);
+
+  var gradBar="<span style='display:inline-block;width:60px;height:7px;border-radius:3px;background:linear-gradient(to right,rgba(26,95,122,0.12),rgba(26,95,122,0.70));vertical-align:middle;margin:0 3px'></span>";
+  document.getElementById("lsa-fan-lbl").innerHTML=
+    "生活範囲：<strong style='color:"+lsaInfo.color+"'>"+lsaInfo.label+"</strong>（"+D.lsaScore+" / 120点）　"+
+    "<span style='font-size:7px;color:#555'>低スコア</span>"+gradBar+"<span style='font-size:7px;color:#555;font-weight:700'>高スコア</span>　"+
+    LSA_FANS.map(function(lv){return "<span style='font-size:6.5px;color:#1C2B3A;margin-right:3px'>"+lv.label+"</span>";}).join("<span style='font-size:6px;color:#aaa'>/</span>");
+
+  // 歩行
+  var wg=document.getElementById("walk-grid");
+  var comfInfo=getComf(D.comf_speed);
+  var fastInfo=getComf(D.fast_speed);
+  var tugRI=getTug(D.tugR);
+  var tugLI=getTug(D.tugL);
+
+  function buildCard(item){
+    var d=document.createElement("div");
+    d.className="walk-card";
+    d.style.background=item.info.bg;
+    d.style.border="1.5px solid "+item.info.color+"55";
+    d.style.flex="1";
+    d.innerHTML=
+      "<div class='walk-lbl'>"+item.label+"</div>"+
+      "<div class='walk-row'>"+
+        "<span class='walk-val' style='color:"+item.info.color+"'>"+item.val+"</span>"+
+        "<span class='walk-unit'>"+item.unit+"</span>"+
+        "<span class='walk-badge' style='color:"+item.info.color+";border:1px solid "+item.info.color+"55;margin-left:auto'>"+item.info.label+"</span>"+
+      "</div>"+
+      (item.sub?"<div style='font-size:8.5px;color:#6B8A9A;margin-top:1px'>"+item.sub+"</div>":"")+
+      "<div class='walk-desc'>"+item.desc+"</div>";
+    return d;
+  }
+  function buildLegend(title,items){
+    var d=document.createElement("div");
+    d.style.cssText="background:#F0F4F8;border-radius:7px;padding:5px 9px;";
+    d.innerHTML="<div style='font-size:7.5px;color:#8AA5B5;font-weight:700;margin-bottom:3px'>"+title+"</div>"+
+      "<div style='display:flex;gap:10px;flex-wrap:wrap'>"+
+      items.map(function(x){return "<div style='display:flex;align-items:center;gap:3px'><div style='width:7px;height:7px;border-radius:2px;background:"+x.c+";flex-shrink:0'></div><span style='font-size:7px;color:#4A6275'>"+x.l+"</span></div>";}).join("")+
+      "</div>";
+    return d;
+  }
+
+  var r10m=document.createElement("div"); r10m.style.cssText="display:flex;gap:7px;";
+  [{label:"10m歩行（快適）",val:D.comf_time.toFixed(2),unit:"秒",sub:"歩行速度："+D.comf_speed.toFixed(2)+" m/s",info:comfInfo,desc:"楽に歩いたときのタイム"},
+   {label:"10m歩行（速歩）",val:D.fast_time.toFixed(2),unit:"秒",sub:"歩行速度："+D.fast_speed.toFixed(2)+" m/s",info:fastInfo,desc:"できるだけ速く歩いたときのタイム"}
+  ].forEach(function(item){r10m.appendChild(buildCard(item));});
+  wg.appendChild(r10m);
+  wg.appendChild(buildLegend("10m歩行の目安（タイム基準）",
+    COMF_Z.map(function(z){return {c:z.color,l:z.cutoffSec+" "+z.label};})));
+
+  var rTug=document.createElement("div"); rTug.style.cssText="display:flex;gap:7px;";
+  [{label:"TUG 右回り",val:D.tugR.toFixed(1),unit:"秒",sub:"",info:tugRI,desc:"右方向に方向転換したときのタイム"},
+   {label:"TUG 左回り",val:D.tugL.toFixed(1),unit:"秒",sub:"",info:tugLI,desc:"左方向に方向転換したときのタイム"}
+  ].forEach(function(item){rTug.appendChild(buildCard(item));});
+  wg.appendChild(rTug);
+  wg.appendChild(buildLegend("TUGの目安（カットオフ値）",
+    [{c:"#4D96FF",l:"〜13.4秒：良好"},{c:"#4CAF82",l:"〜19.9秒：転倒注意"},{c:"#FFB347",l:"〜29.9秒：屋内自立"},{c:"#FF6B6B",l:"30秒〜：要介助"}]));
+});
+</script>
+</body>
+</html>
